@@ -10,7 +10,7 @@ phases:
 
   pre_build:
     commands:
-     - - echo Pre Build Phase
+     - echo Pre Build Phase
 
   build:
     commands:
