@@ -1,28 +1,27 @@
 version: 0.2
-runtime-versions:
-  nodejs: 14  # Node.js ka version yahan specify karein
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 14  #
     commands:
-      - echo Installing dependencies
-      - npm install 
+      - echo "Installing dependencies..."
+      - npm install  #
 
   pre_build:
     commands:
-     - echo Pre Build Phase
+      - echo "Running pre-build tasks..."
 
   build:
     commands:
-      - echo Build started on `date`
+      - echo "Build started on `date`"
       - npm run build  #
-      - echo Build completed on `date`
+      - echo "Build completed on `date`"
 
   post_build:
     commands:
-      - echo Copying files to S3
-      - aws s3 sync public/ s3://testing1-destination --exclude ".git/*"
-
+      - echo "Post-build tasks..."
 artifacts:
   files:
-    - public/**/*  #
+    - '**/*'  #
+  discard-paths: yes  #
