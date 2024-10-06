@@ -6,13 +6,18 @@ phases:
       - echo Installing dependencies
       - npm install 
 
+  pre_build:
+    commands:
+      - echo Pre Build Phase - Running tests (agar aapke paas tests hain)
+      # Yahan aap test commands add kar sakte hain agar zaroorat ho
+
   build:
     commands:
       - echo Build started on `date`
+      - npm run build  # Agar aapke paas build script hai
       - echo Build completed on `date`
       
   post_build:
     commands:
       - echo Copying files to S3
       - aws s3 sync public/ s3://my-website-bucket --exclude ".git/*"
-
