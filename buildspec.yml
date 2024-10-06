@@ -2,22 +2,29 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 14 # Ya jis version ka aap istemal kar rahe hain
     commands:
       - echo Installing dependencies
       - npm install 
 
   pre_build:
     commands:
-      - echo Pre Build Phase - Running tests (agar aapke paas tests hain)
-      # Yahan aap test commands add kar sakte hain agar zaroorat ho
+      - echo Pre-build phase
+      - npm run build # Yadi aapke paas build script hai, nahi to is line ko hata sakte hain
 
   build:
     commands:
       - echo Build started on `date`
-      - npm run build  # Agar aapke paas build script hai
       - echo Build completed on `date`
       
   post_build:
     commands:
       - echo Copying files to S3
       - aws s3 sync public/ s3://my-website-bucket --exclude ".git/*"
+
+artifacts:
+  files:
+    - public/index.html
+    - public/style.css
+    - public/script.js
