@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependencies
+      - npm install 
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Build completed on `date`
+      
+  post_build:
+    commands:
+      - echo Copying files to S3
+      - aws s3 sync public/ s3://my-website-bucket --exclude ".git/*"
+
